@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:,">
+<title>GARGANTUA — Schwarzschild Black Hole Raytracer</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.js",
+    "three/addons/": "./vendor/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<canvas id="view" aria-label="Real-time Schwarzschild black hole raytracer"></canvas>
+
+<div id="fx" aria-hidden="true"></div>
+
+<div id="hud">
+  <div class="corner tl" aria-hidden="true"></div>
+  <div class="corner tr" aria-hidden="true"></div>
+  <div class="corner bl" aria-hidden="true"></div>
+  <div class="corner br" aria-hidden="true"></div>
+
+  <header class="title-block">
+    <h1 class="title">GARGANTUA</h1>
+    <div class="subtitle">SUPERMASSIVE BLACK HOLE · 1.0 × 10⁸ M☉</div>
+    <div class="tag">SCHWARZSCHILD METRIC // NULL-GEODESIC RAYTRACING</div>
+  </header>
+
+  <div class="mission">
+    <div class="mission-label">MISSION ELAPSED</div>
+    <div class="mission-clock" id="mClock">00:00:00</div>
+  </div>
+
+  <div class="telemetry" role="status" aria-label="Observer telemetry">
+    <div class="trow"><span class="tlabel">OBSERVER DISTANCE</span><span class="tval" id="tDist">—</span></div>
+    <div class="trow"><span class="tlabel">DISK INCLINATION</span><span class="tval" id="tIncl">—</span></div>
+    <div class="trow"><span class="tlabel">GEODESIC STEPS</span><span class="tval" id="tSteps">—</span></div>
+    <div class="trow"><span class="tlabel">RENDER PROFILE</span><span class="tval" id="tProfile">—</span></div>
+    <div class="trow"><span class="tlabel">FRAME RATE</span><span class="tval" id="tFps">—</span></div>
+  </div>
+
+  <div id="toast" role="alert"></div>
+
+  <nav class="deck" id="deck" aria-label="Flight deck">
+    <div class="deck-title" id="deckTitle">CINEMATIC SEQUENCE</div>
+    <button class="btn wide active" id="btnCine" aria-pressed="true">CINEMATIC</button>
+    <div class="grid2">
+      <button class="btn" data-preset="poster">POSTER</button>
+      <button class="btn" data-preset="edge">EDGE</button>
+      <button class="btn" data-preset="polar">POLAR</button>
+      <button class="btn" data-preset="close">CLOSE</button>
+    </div>
+    <div class="grid4">
+      <button class="btn" id="btnAuto" aria-pressed="false">AUTO</button>
+      <button class="btn" id="btnQuality">CINEMATIC</button>
+      <button class="btn" id="btnParams" aria-pressed="false">PARAMS</button>
+      <button class="btn active" id="btnHud" aria-pressed="true">HUD</button>
+    </div>
+    <button class="btn wide" id="btnSound" aria-pressed="false">🔇 SOUND: OFF</button>
+    <div class="deck-hint">1-4 VIEWS · C CINE · R ORBIT · P PARAMS · M SOUND · H HUD</div>
+  </nav>
+
+  <div id="hint" aria-hidden="true">DRAG ORBIT · SCROLL/PINCH ZOOM · C CINEMATIC · M SOUND · 1-4 VIEWS · P PARAMS · H HUD</div>
+</div>
+
+<div id="params" class="hidden" role="dialog" aria-label="Raytracing parameters">
+  <div class="params-head">
+    <span>PARAMETERS</span>
+    <button class="btn" id="btnReset">RESET</button>
+  </div>
+  <div class="params-body" id="paramsBody"></div>
+</div>
+
+<div id="intro" aria-hidden="true">
+  <div class="intro-card">
+    <div class="intro-kicker">REAL-TIME RELATIVISTIC RAYTRACING</div>
+    <div class="intro-title">GARGANTUA</div>
+    <div class="intro-quote">“Do not go gentle into that good night.”</div>
+  </div>
+</div>
+
+<div id="fatal" hidden>
+  <div class="fatal-card" role="alertdialog" aria-labelledby="fatalTitle">
+    <div class="fatal-kicker">MISSION ANOMALY</div>
+    <div class="fatal-title" id="fatalTitle">SIGNAL LOST</div>
+    <div class="fatal-msg" id="fatalMsg"></div>
+    <div class="fatal-actions">
+      <button class="btn" id="fatalRetry">REINITIALISE</button>
+      <button class="btn" id="fatalLower">LOWER QUALITY</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
